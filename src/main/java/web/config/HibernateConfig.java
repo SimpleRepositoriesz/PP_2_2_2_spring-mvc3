@@ -20,7 +20,6 @@ import javax.sql.DataSource;
 import java.util.Objects;
 import java.util.Properties;
 
-
 @EnableTransactionManagement
 @EnableJpaRepositories("web.dao")
 @Configuration
@@ -32,13 +31,11 @@ public class HibernateConfig {
 
     @Autowired
     public HibernateConfig(ApplicationContext applicationContext, Environment env) {
-
         this.env = env;
     }
 
     @Bean
     public DataSource getDataSource() {
-
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(Objects.requireNonNull(env.getRequiredProperty("db.driver")));
         dataSource.setUrl(env.getRequiredProperty("db.url"));
@@ -49,7 +46,6 @@ public class HibernateConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-
         final LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
         entityManager.setDataSource(getDataSource());
         entityManager.setPackagesToScan("web");
@@ -64,16 +60,11 @@ public class HibernateConfig {
         properties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-
-
-        properties.forEach((key, value) -> System.out.println(key + ": " + value));
         return properties;
     }
 
-
     @Bean
     public PlatformTransactionManager transactionManager() {
-
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
@@ -81,7 +72,6 @@ public class HibernateConfig {
 
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-
         return new PersistenceExceptionTranslationPostProcessor();
     }
 }

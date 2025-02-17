@@ -68,21 +68,14 @@
     Incorrect surname
   </p>
 
-  <label>Enter department: </label>
-  <input type="text" th:field="*{department}" id="department" required/>
-  <p class="error" th:if="${#fields.hasErrors('department')}" th:errors="*{department}">
-    Incorrect department
-  </p>
-
-  <label>Enter salary: </label>
-  <input type="number" th:field="*{salary}" id="salary" required/>
-  <p class="error" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}">
-    Incorrect salary
+  <label>Enter age: </label>
+  <input type="number" th:field="*{age}" id="age" required/>
+  <p class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">
+    Incorrect age
   </p>
 
   <input type="submit" value="Save"/>
 </form>
-
 
 </body>
 </html>

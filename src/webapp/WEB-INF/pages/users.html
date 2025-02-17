@@ -59,7 +59,7 @@
             margin-top: 20px;
         }
 
-        .add-user-form button {
+        .add-user-form a { /* Changed to 'a' tag */
             padding: 10px 15px;
             border: none;
             border-radius: 4px;
@@ -67,10 +67,12 @@
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
+            text-decoration: none; /* Remove underline from link */
         }
 
-        .add-user-form button:hover {
+        .add-user-form a:hover { /* Changed to 'a' tag */
             background-color: #45a049;
+            text-decoration: none; /* Keep no underline on hover */
         }
     </style>
 </head>
@@ -95,17 +97,19 @@
         <td th:text="${user.surname}"></td>
         <td th:text="${user.age}"></td>
         <td>
-            <a th:href="@{updateuser(id=${user.id})}">Update</a>
-            <a th:href="@{deleteUser(id=${user.id})}">Delete</a>
+            <a th:href="@{/edit(id=${user.id})}">Update</a>
+            <form th:action="@{/delete}" method="post" style="display:inline">
+                <input type="hidden" name="id" th:value="${user.id}">
+                <button type="submit">Delete</button>
+            </form>
         </td>
+
     </tr>
     </tbody>
 </table>
 
 <div class="add-user-form">
-    <form action="/users/add" method="post">
-        <button type="submit">Add new user</button>
-    </form>
+    <a th:href="@{/users/add}">Add new user</a>
 </div>
 
 </body>
